@@ -7,6 +7,7 @@ A modern Python tool for hierarchical numbering of markdown files and headlines 
 - **Hierarchical File Numbering**: Automatically numbers markdown files based on parent folder structure
 - **Headline Numbering**: Adds hierarchical numbering to headlines that builds on the file's number
 - **Complete Hierarchy**: Creates a consistent numbering system from folders → files → headlines
+- **Code Block Fixing**: Automatically fixes HTML-encoded code blocks in markdown files
 - **Modern Python**: Built with contemporary best practices, type safety, and async processing
 - **High Performance**: Async file processing with controlled concurrency
 - **Comprehensive Logging**: Structured logging with rich output and progress reporting
@@ -33,6 +34,55 @@ python main.py input_folder output_folder
 # Example with absolute paths
 python main.py /Users/ruben/Nextcloud/02\ -\ AREAS/RAG/250711\ input\ output/input /Users/ruben/Nextcloud/02\ -\ AREAS/RAG/250711\ input\ output/output
 ```
+
+## Code Block Fixing
+
+The project includes a utility script to fix HTML-encoded code blocks in markdown files. This is useful when markdown files contain code blocks with HTML `<div>`, `<p>`, and `<span>` tags instead of clean code.
+
+### Usage
+
+```bash
+# Fix code blocks and save to new directory
+python fix_code_blocks.py input_folder output_folder
+
+# Fix code blocks in place (modify original files)
+python fix_code_blocks.py input_folder
+```
+
+### Example
+
+**Before (HTML-encoded):**
+```markdown
+```
+<div><p><span>import</span><span> fal_client</span></p></div>
+<div><p><span>handler </span><span>=</span><span> fal_client.</span><span>submit</span><span>(</span></p></div>
+```
+```
+
+**After (clean Python):**
+```markdown
+```
+import fal_client
+
+handler = fal_client.submit(
+  "fal-ai/flux/dev",
+  arguments={
+      "prompt": "photo of a rhino dressed suit and tie sitting at a table in a bar with a bar stools, award winning photography, Elke vogelsang"
+  },
+)
+
+result = handler.get()
+print(result)
+```
+```
+
+### Features
+
+- **Recursive Processing**: Automatically processes all markdown files in subdirectories
+- **Smart Code Extraction**: Removes HTML tags and formats code properly
+- **Pattern Recognition**: Handles common patterns like Python imports, function calls, and variable assignments
+- **Safe Operation**: Can modify files in place or save to new location
+- **Specific Handling**: Optimized for fal_client and other common API examples
 
 ## Example
 
@@ -106,6 +156,9 @@ python main.py input output
 
 # Test with your own files
 python main.py /path/to/your/input /path/to/your/output
+
+# Test code block fixing
+python fix_code_blocks.py input output_fixed
 ```
 
 ## Configuration
@@ -163,4 +216,5 @@ MIT License - see LICENSE file for details.
 - [ ] Batch processing with custom batch IDs
 - [ ] Performance optimization for large file sets
 - [ ] Additional output formats (PDF, HTML)
-- [ ] Plugin architecture for custom numbering strategies 
+- [ ] Plugin architecture for custom numbering strategies
+- [ ] Enhanced code block fixing with language detection 
