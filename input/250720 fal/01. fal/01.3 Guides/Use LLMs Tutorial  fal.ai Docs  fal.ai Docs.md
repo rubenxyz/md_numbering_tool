@@ -3,7 +3,8 @@ fal provides an easy-to-use API for generating text using Language Models (LLMs)
 Here’s an example of how to use the `fal-ai/any-llm` endpoint to generate text using the `anthropic/claude-3.5-sonnet` model:
 
 ```
-<div><p><span>import</span><span> { fal } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/client</span><span>"</span><span>;</span></p></div><div><p><span>const </span><span>result</span><span> = await </span><span>fal</span><span>.</span><span>subscribe</span><span>(</span><span>"</span><span>fal-ai/any-llm</span><span>"</span><span>, {</span></p></div><div><p><span><span>  </span></span><span>input: {</span></p></div><div><p><span><span>    </span></span><span>model: </span><span>"</span><span>anthropic/claude-3.5-sonnet</span><span>"</span><span>,</span></p></div><div><p><span><span>    </span></span><span>prompt: </span><span>"</span><span>What is the meaning of life?</span><span>"</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>}</span><span>);</span></p></div>
+import { fal } from "@fal-ai/client";const result = await fal.subscribe("fal-ai/any-llm", { input: { model: "anthropic/claude-3.5-sonnet", prompt: "What is the meaning of life?" },})
+;
 ```
 
 ## How to select LLM model to use

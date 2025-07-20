@@ -5,7 +5,16 @@ All our Model Endpoint’s support HTTP/REST. Additionally our real-time models 
 Before we proceed, you need to create your [API key](https://fal.ai/dashboard/keys).
 
 ```
-<div><p><span>import</span><span> { fal } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/client</span><span>"</span><span>;</span></p></div><div><p><span>fal</span><span>.</span><span>config</span><span>({</span></p></div><div><p><span><span>  </span></span><span>credentials: </span><span>"</span><span>PASTE_YOUR_FAL_KEY_HERE</span><span>"</span><span>,</span></p></div><div><p><span>});</span></p></div><div><p><span>const </span><span>connection</span><span> = </span><span>fal</span><span>.</span><span>realtime</span><span>.</span><span>connect</span><span>(</span><span>"</span><span>fal-ai/fast-lcm-diffusion</span><span>"</span><span>, {</span></p></div><div><p><span>  </span><span>onResult</span><span>: </span><span>(</span><span>result</span><span>)</span><span> =&gt; {</span></p></div><div><p><span>    </span><span>console</span><span>.</span><span>log</span><span><span>(</span><span>result</span><span>)</span></span><span>;</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>  </span><span>onError</span><span>: </span><span>(</span><span>error</span><span>)</span><span> =&gt; {</span></p></div><div><p><span>    </span><span>console</span><span>.</span><span>error</span><span><span>(</span><span>error</span><span>)</span></span><span>;</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>}</span><span>);</span></p></div><div><p><span>connection</span><span>.</span><span>send</span><span>({</span></p></div><div><p><span><span>  </span></span><span>prompt:</span></p></div><div><p><span>    </span><span>"</span><span>an island near sea, with seagulls, moon shining over the sea, light house, boats int he background, fish flying over the sea</span><span>"</span><span>,</span></p></div><div><p><span><span>  </span></span><span>sync_mode: </span><span>true</span><span>,</span></p></div><div><p><span><span>  </span></span><span>image_url:</span></p></div><div><p><span>    </span><span>"</span><span>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==</span><span>"</span><span>,</span></p></div><div><p><span>});</span></p></div>
+import { fal } from "@fal-ai/client";fal.config({ credentials: "PASTE_YOUR_FAL_KEY_HERE",})
+;const connection = fal.realtime.connect("fal-ai/fast-lcm-diffusion", { onResult: (result) 
+=&gt; { console.log(result)
+; },
+onError: (error) 
+=&gt; { console.error(error)
+; },
+})
+;connection.send({ prompt: "an island near sea, with seagulls, moon shining over the sea, light house, boats int he background, fish flying over the sea", sync_mode: true, image_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",})
+;
 ```
 
 You can read more about the real time clients in our [real time client docs](https://docs.fal.ai/model-endpoints#the-fal-client) section.

@@ -11,210 +11,245 @@ A modern Python tool for hierarchical numbering of markdown files and headlines 
 - **Modern Python**: Built with contemporary best practices, type safety, and async processing
 - **High Performance**: Async file processing with controlled concurrency
 - **Comprehensive Logging**: Structured logging with rich output and progress reporting
+- **Hardcoded Directories**: Uses fixed input/output folders for consistent workflow
 
 ## Quick Start
 
-### Installation
+### Prerequisites
+- Python 3.8+
+- Virtual environment (recommended)
 
+### Installation
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/markdown-numberer.git
-cd markdown-numberer
+# Clone and setup
+git clone <repository>
+cd md-numbering
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -e .
 ```
 
-### Usage
+## Usage
 
-```bash
-# Process markdown files with numbering
-python main.py input_folder output_folder
+### Quick Start
 
-# Example with absolute paths
-python main.py /Users/ruben/Nextcloud/02\ -\ AREAS/RAG/250711\ input\ output/input /Users/ruben/Nextcloud/02\ -\ AREAS/RAG/250711\ input\ output/output
-```
+1. **Place your files** in the `input/` directory
+2. **Run the numbering script**:
+   ```bash
+   python main.py
+   ```
+3. **Run the code block fixing script**:
+   ```bash
+   python fix_code_blocks.py
+   ```
+4. **Check results** in the `output/` directory
 
-## Code Block Fixing
+### Output Structure
 
-The project includes a utility script to fix HTML-encoded code blocks in markdown files. This is useful when markdown files contain code blocks with HTML `<div>`, `<p>`, and `<span>` tags instead of clean code.
+Both scripts create timestamped subfolders in the `output/` directory:
 
-### Usage
-
-```bash
-# Fix code blocks and save to new directory
-python fix_code_blocks.py input_folder output_folder
-
-# Fix code blocks in place (modify original files)
-python fix_code_blocks.py input_folder
-```
-
-### Example
-
-**Before (HTML-encoded):**
-```markdown
-```
-<div><p><span>import</span><span> fal_client</span></p></div>
-<div><p><span>handler </span><span>=</span><span> fal_client.</span><span>submit</span><span>(</span></p></div>
-```
-```
-
-**After (clean Python):**
-```markdown
-```
-import fal_client
-
-handler = fal_client.submit(
-  "fal-ai/flux/dev",
-  arguments={
-      "prompt": "photo of a rhino dressed suit and tie sitting at a table in a bar with a bar stools, award winning photography, Elke vogelsang"
-  },
-)
-
-result = handler.get()
-print(result)
-```
-```
-
-### Features
-
-- **Recursive Processing**: Automatically processes all markdown files in subdirectories
-- **Smart Code Extraction**: Removes HTML tags and formats code properly
-- **Pattern Recognition**: Handles common patterns like Python imports, function calls, and variable assignments
-- **Safe Operation**: Can modify files in place or save to new location
-- **Specific Handling**: Optimized for fal_client and other common API examples
-
-## Example
-
-**Input Structure:**
-```
-input/
-├── 00.1 Introduction/
-│   ├── intro.md
-│   └── overview.md
-└── 00.2 Getting Started/
-    ├── setup.md
-    └── installation.md
-```
-
-**Output Structure:**
 ```
 output/
-└── batch_2025-07-20_15-46-47/
-    ├── logs/
-    │   ├── batch.log
-    │   ├── processing.log
-    │   ├── errors.log
-    │   └── performance.log
-    ├── mappings/
-    │   └── file_mappings.json
-    ├── reports/
-    │   ├── batch_summary.md
-    │   ├── batch_summary.html
-    │   └── batch_summary.json
-    ├── backups/
-    └── 00.1 Introduction/
-        ├── 00.1.1-intro.md
-        └── 00.1.2-overview.md
-    └── 00.2 Getting Started/
-        ├── 00.2.1-setup.md
-        └── 00.2.2-installation.md
+├── 2025-07-20_18-44-10/          # Markdown numbering results
+│   ├── 250720 fal/
+│   │   ├── 01. fal/
+│   │   │   ├── 01.1 Introduction  fal.ai Docs  fal.ai Docs.md
+│   │   │   ├── 01.2 Quickstart with fal  fal.ai Docs  fal.ai Docs.md
+│   │   │   └── ...
+│   │   └── 02. Models/
+│   │       ├── 02.1-seedream3.md
+│   │       ├── 02.1-flux1_kontext_max_multi-img.md
+│   │       └── ...
+│   ├── batch_metadata.json
+│   ├── logs/
+│   ├── mappings/
+│   └── reports/
+└── 2025-07-20_18-40-02/          # Code block fixing results
+    └── 250720 fal/
+        ├── 01. fal/
+        │   ├── 01.1 Introduction  fal.ai Docs  fal.ai Docs.md
+        │   ├── 01.2 Quickstart with fal  fal.ai Docs  fal.ai Docs.md
+        │   └── ...
+        └── 02. Models/
+            ├── seedream3.md
+            ├── seedream3.json
+            ├── flux1_kontext_max_multi-img.md
+            ├── flux1_kontext_max_multi-img.json
+            └── ...
 ```
 
-**Numbered Content Example:**
+## Directory Structure
+
+**Important**: Both scripts use hardcoded input and output directories and create timestamped subfolders:
+
+- **Input Directory**: `input/` - Place your markdown files here
+- **Output Directory**: `output/` - Processed files are saved in timestamped subfolders
+
+### Required Folder Structure
+```
+project/
+├── input/           # ← Hardcoded input folder
+│   ├── 01. Introduction/
+│   │   ├── intro.md
+│   │   └── setup.md
+│   └── 02. Tutorial/
+│       └── getting-started.md
+├── output/          # ← Hardcoded output folder
+│   ├── batch_2025-01-20_14-30-25/     # ← Timestamped numbering results
+│   │   ├── logs/
+│   │   ├── reports/
+│   │   ├── 01.1-intro.md
+│   │   └── 02.1-getting-started.md
+│   └── code_blocks_fixed_2025-01-20_14-35-12/  # ← Timestamped code block fixes
+│       ├── 01. Introduction/
+│       └── 02. Tutorial/
+├── main.py
+├── fix_code_blocks.py
+└── README.md
+```
+
+### Timestamped Output Structure
+
+Both scripts create timestamped subfolders in the `output/` directory:
+
+**Main Numbering Script:**
+- **Folder Name**: `batch_YYYY-MM-DD_HH-MM-SS/`
+- **Contents**: Numbered markdown files, logs, reports, mappings
+
+**Code Block Fixing Script:**
+- **Folder Name**: `code_blocks_fixed_YYYY-MM-DD_HH-MM-SS/`
+- **Contents**: Fixed markdown files with clean code blocks
+
+## Features
+
+### Markdown Numbering
+
+Automatically numbers headlines in markdown files with hierarchical numbering.
+
+**Before:**
 ```markdown
-# 00.1.1.1 Introduction
-## 00.1.1.1.1 What is this guide
-## 00.1.1.1.2 Who should read this
-
-# 00.1.2.1 Overview  
-## 00.1.2.1.1 System architecture
-### 00.1.2.1.1.1 Core components
+# Introduction
+## Overview
+### Getting Started
+## Installation
 ```
 
-## Development
-
-### Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/markdown-numberer.git
-cd markdown-numberer
-
-# Install dependencies
-pip install -e .
-
-# Activate virtual environment (if using one)
-source venv/bin/activate  # or your preferred method
+**After:**
+```markdown
+# 01.1 Introduction
+## 01.1.1 Overview
+### 01.1.1.1 Getting Started
+## 01.1.2 Installation
 ```
 
-### Testing the Script
+#### Markdown Numbering Features
+- **Hierarchical Numbering**: Maintains proper headline hierarchy (01.1, 01.1.1, etc.)
+- **Recursive Processing**: Automatically processes all subdirectories
+- **File Renaming**: Adds numbered prefixes to filenames (e.g., `01.1-introduction.md`)
+- **Smart Sorting**: Maintains alphabetical order within each level
+- **Hardcoded Directories**: Uses `input/` and `output/` folders automatically
+- **Timestamped Output**: Creates output subfolders with format `YYYY-MM-DD_HH-MM-SS`
+- **Comprehensive Verification**: Validates all files were processed correctly
 
-```bash
-# Test with sample files
-python main.py input output
+### Verification Systems
 
-# Test with your own files
-python main.py /path/to/your/input /path/to/your/output
+Both scripts include comprehensive verification to ensure processing quality:
 
-# Test code block fixing
-python fix_code_blocks.py input output_fixed
+#### Markdown Numbering Script Verification
+- **File Count Validation**: Ensures all input files have corresponding output files
+- **Success Rate Calculation**: Reports percentage of successful processing
+- **File Mapping Validation**: Checks file integrity and numbering consistency
+- **Processing Statistics**: Detailed metrics on processing time, file sizes, headlines
+- **Error Reporting**: Comprehensive error logging and reporting
+
+**Example Output:**
 ```
+Total files: 38
+Processed: 38
+Failed: 0
+Success rate: 100.0%
+Total headlines processed: 301
+```
+
+#### Code Block Fixing Script Verification
+- **HTML Removal Verification**: Confirms HTML tags were successfully removed
+- **Code Block Counting**: Tracks how many code blocks were fixed
+- **Content Preservation**: Ensures no content was lost during processing
+- **Batch Verification**: Validates entire processing operation
+- **Success Rate Reporting**: Shows verification success percentage
+
+**Example Output:**
+```
+📊 Verification Results:
+  • Input files: 54
+  • Output files: 54
+  • Files verified: 54
+  • Verification passed: 54
+  • Verification failed: 0
+  • Success rate: 100.0%
+  • HTML code blocks removed: 90
+  • Total code blocks fixed: 90
+
+✅ Verification PASSED - High success rate!
+```
+
+#### Verification Benefits
+- **Quality Assurance**: Ensures processing meets expected standards
+- **Error Detection**: Identifies and reports processing issues
+- **Transparency**: Provides detailed metrics on processing results
+- **Confidence**: Gives users assurance that files were processed correctly
+- **Debugging**: Helps identify and resolve processing problems
 
 ## Configuration
 
-The script uses sensible defaults for most settings. If you need to customize the behavior, you can modify the `create_default_config()` function in `main.py`:
+### Hardcoded Directory Requirements
 
-```python
-def create_default_config(input_path: Path, output_path: Path) -> ProcessingConfig:
-    return ProcessingConfig(
-        input_path=input_path,
-        output_path=output_path,
-        start_level=1,                    # Starting level for numbering
-        max_depth=6,                      # Maximum depth for headlines
-        separator=".",                    # Separator for hierarchical numbers
-        preserve_existing=False,          # Whether to preserve existing numbering
-        sorting_method="alphabetical",    # File sorting method
-        filename_separator="-",           # Separator between number and filename
-        preserve_original_name=True,      # Keep original filename
-        include_patterns=["*.md", "*.markdown"],  # File patterns to process
-        exclude_patterns=["**/.*", "**/*temp*"],  # File patterns to exclude
-        max_concurrent_files=10,          # Concurrent processing limit
-        log_level="INFO",                 # Logging level
-        # ... other settings
-    )
+Both scripts are designed to work with fixed input and output directories:
+
+1. **Input Directory**: Must be named `input/` in the project root
+2. **Output Directory**: Must be named `output/` in the project root
+3. **Timestamped Subfolders**: Results are saved in timestamped subfolders within `output/`
+4. **No Command Line Arguments**: Scripts run automatically without parameters
+5. **Consistent Workflow**: Same directory structure for all operations
+
+### Why Hardcoded Directories?
+- **Simplified Usage**: No need to remember or specify paths
+- **Consistent Workflow**: Same behavior across different projects
+- **Error Prevention**: Eliminates path-related mistakes
+- **Automation Friendly**: Easy to integrate into automated workflows
+- **Version Control**: Timestamped outputs preserve processing history
+
+## Development
+
+### Project Structure
+```
+src/markdown_numberer/
+├── core/           # Core numbering logic
+├── services/       # File processing services
+└── __init__.py
 ```
 
-## Architecture
+### Testing
+```bash
+# Run the markdown numbering script
+python main.py
 
-The project follows modern Python architecture patterns:
+# Run the code block fixing script
+python fix_code_blocks.py
 
-- **Type Safety**: Full type hints with Pydantic validation
-- **Async Processing**: High-performance async file handling
-- **Service Architecture**: Clean separation of concerns
-- **Configuration Management**: Pydantic-based validation
-- **Error Handling**: Comprehensive exception hierarchy
-- **Logging**: Structured logging with multiple output formats
+# Check results in output/ directory
+ls output/
+```
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test the script with your changes
-5. Ensure the script works correctly
-6. Submit a pull request
+### Adding New Features
+1. Follow the existing hardcoded directory pattern
+2. Use `input/` for source files
+3. Use `output/` for processed results
+4. Maintain the same simple command-line interface
+5. Use timestamp-only format for output subfolders
 
 ## License
 
-MIT License - see LICENSE file for details.
-
-## Roadmap
-
-- [ ] Configuration file support (YAML/JSON)
-- [ ] Command-line argument customization
-- [ ] Batch processing with custom batch IDs
-- [ ] Performance optimization for large file sets
-- [ ] Additional output formats (PDF, HTML)
-- [ ] Plugin architecture for custom numbering strategies
-- [ ] Enhanced code block fixing with language detection 
+[Add your license information here]

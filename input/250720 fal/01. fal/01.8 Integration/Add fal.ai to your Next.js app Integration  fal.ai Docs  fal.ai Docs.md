@@ -19,7 +19,7 @@ Using your favorite package manager, install both the `@fal-ai/client` and `@fal
 -   [pnpm](https://docs.fal.ai/integrations/nextjs#tab-panel-26)
 
 ```
-<div><p><span>npm</span><span> </span><span>install</span><span> </span><span>@fal-ai/client</span><span> </span><span>@fal-ai/server-proxy</span></p></div>
+npm install @fal-ai/client @fal-ai/server-proxy
 ```
 
 ### 2\. Setup the proxy
@@ -31,7 +31,7 @@ The proxy will protect your API Key and prevent it from being exposed to the cli
 If you are using the **Page Router** (i.e. `src/pages/_app.js`), create an API handler in `src/pages/api/fal/proxy.js` (or `.ts` in case of TypeScript), and re-export the built-in proxy handler:
 
 ```
-<div><p><span>export</span><span> { handler </span><span>as</span><span> </span><span>default</span><span> } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/server-proxy/nextjs</span><span>"</span><span>;</span></p></div>
+export { handler as default } from "@fal-ai/server-proxy/nextjs";
 ```
 
 #### 2.2. App Router
@@ -39,7 +39,8 @@ If you are using the **Page Router** (i.e. `src/pages/_app.js`), create an API h
 If you are using the **App Router** (i.e. `src/app/page.jsx`) create a route handler in `src/app/api/fal/proxy/route.js` (or `.ts` in case of TypeScript), and re-export the route handler:
 
 ```
-<div><p><span>import</span><span> { route } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/server-proxy/nextjs</span><span>"</span><span>;</span></p></div><div><p><span>export const { </span><span>GET</span><span>, </span><span>POST</span><span> } = </span><span>route;</span></p></div>
+import { route } from "@fal-ai/server-proxy/nextjs";export const { GET,
+POST } = route;
 ```
 
 #### 2.3. Setup the API Key
@@ -47,7 +48,7 @@ If you are using the **App Router** (i.e. `src/app/page.jsx`) create a route han
 Make sure you have your API Key available as an environment variable. You can setup in your `.env.local` file for development and also in your hosting provider for production, such as [Vercel](https://vercel.com/docs/projects/environment-variables).
 
 ```
-<div><p><span>FAL_KEY</span><span>=</span><span>"</span><span>key_id:key_secret</span><span>"</span></p></div>
+FAL_KEY="key_id:key_secret"
 ```
 
 #### 2.4. Custom proxy logic
@@ -57,7 +58,15 @@ It’s common for applications to execute custom logic before or after the proxy
 For example, let’s assume you want to add some analytics and apply some rate limit to the proxy handler:
 
 ```
-<div><p><span>import</span><span> { route } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/server-proxy/nextjs</span><span>"</span><span>;</span></p></div><div><p><span>// Let's add some custom logic to POST requests - i.e. when the request is</span></p></div><div><p><span>// submitted for processing</span></p></div><div><p><span>export const </span><span>POST</span><span> = </span><span>(</span><span>req</span><span>)</span><span> =&gt; {</span></p></div><div><p><span>  </span><span>// Add some analytics</span></p></div><div><p><span>  </span><span>analytics</span><span>.</span><span>track</span><span>(</span><span>"</span><span>fal.ai request</span><span>"</span><span>, {</span></p></div><div><p><span><span>    </span></span><span>targetUrl: </span><span>req</span><span>.</span><span>headers</span><span>[</span><span>"</span><span>x-fal-target-url</span><span>"</span><span>]</span><span>,</span></p></div><div><p><span><span>    </span></span><span>userId: </span><span>req</span><span>.</span><span>user</span><span>.</span><span>id</span><span>,</span></p></div><div><p><span><span>  </span></span><span>}</span><span>)</span><span>;</span></p></div><div><p><span>  </span><span>// Apply some rate limit</span></p></div><div><p><span><span>  </span></span><span>if </span><span>(rateLimiter</span><span>.</span><span>shouldLimit</span><span>(req))</span><span> {</span></p></div><div><p><span>    </span><span>res</span><span>.</span><span>status</span><span>(</span><span>429</span><span>)</span><span>.</span><span>json</span><span>(</span><span>{ error: </span><span>"</span><span>Too many requests</span><span>"</span><span> }</span><span>)</span><span>;</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>  </span><span>// If everything passed your custom logic, now execute the proxy handler</span></p></div><div><p><span><span>  </span></span><span>return </span><span>route</span><span>.</span><span>POST</span><span>(req)</span><span>;</span></p></div><div><p><span>}</span><span>;</span></p></div><div><p><span>// For GET requests we will just use the built-in proxy handler</span></p></div><div><p><span>// But you could also add some custom logic here if you need</span></p></div><div><p><span>export const </span><span>GET</span><span> = </span><span>route</span><span>.</span><span>GET</span><span>;</span></p></div>
+import { route } from "@fal-ai/server-proxy/nextjs";// Let's add some custom logic to POST requests - i.e. when the request is// submitted for processingexport const POST = (req) 
+=&gt; { // Add some analytics analytics.track("fal.ai request", { targetUrl: req.headers["x-fal-target-url"], userId: req.user.id, })
+; // Apply some rate limit if (rateLimiter.shouldLimit(req)
+) 
+{ res.status(429)
+.json({ error: "Too many requests" })
+; } // If everything passed your custom logic,
+now execute the proxy handler return route.POST(req)
+;};// For GET requests we will just use the built-in proxy handler// But you could also add some custom logic here if you needexport const GET = route.GET;
 ```
 
 Note that the URL that will be forwarded to server is available as a header named `x-fal-target-url`. Also, keep in mind the example above is just an example, `rateLimiter` and `analytics` are just placeholders.
@@ -69,7 +78,7 @@ The example above used the app router, but the same logic can be applied to the 
 On your main file (i.e. `src/pages/_app.jsx` or `src/app/page.jsx`), configure the client to use the proxy:
 
 ```
-<div><p><span>import</span><span> { fal } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/client</span><span>"</span><span>;</span></p></div><div><p><span>fal</span><span>.</span><span>config</span><span>({</span></p></div><div><p><span><span>  </span></span><span>proxyUrl: </span><span>"</span><span>/api/fal/proxy</span><span>"</span><span>,</span></p></div><div><p><span>});</span></p></div>
+import { fal } from "@fal-ai/client";fal.config({ proxyUrl: "/api/fal/proxy",});
 ```
 
 ### 4\. Generate an image
@@ -77,7 +86,11 @@ On your main file (i.e. `src/pages/_app.jsx` or `src/app/page.jsx`), configure t
 Now that the client is configured, you can generate an image using `fal.subscribe` and pass the model id and the input parameters:
 
 ```
-<div><p><span>const </span><span>result</span><span> = await </span><span>fal</span><span>.</span><span>subscribe</span><span>(</span><span>"</span><span>fal-ai/flux/dev</span><span>"</span><span>, {</span></p></div><div><p><span><span>  </span></span><span>input: {</span></p></div><div><p><span>    </span><span>prompt</span><span>,</span></p></div><div><p><span><span>    </span></span><span>image_size: </span><span>"</span><span>square_hd</span><span>"</span><span>,</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span><span>  </span></span><span>pollInterval: </span><span>5000</span><span>,</span></p></div><div><p><span><span>  </span></span><span>logs: </span><span>true</span><span>,</span></p></div><div><p><span>  </span><span>onQueueUpdate</span><span>(</span><span>update</span><span>)</span><span> {</span></p></div><div><p><span>    </span><span>console</span><span>.</span><span>log</span><span>(</span><span>"</span><span>queue update</span><span>"</span><span>, </span><span>update)</span><span>;</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>}</span><span>);</span></p></div><div><p><span>const </span><span>imageUrl</span><span> = </span><span>result</span><span>.</span><span>images</span><span>[</span><span>0</span><span>]</span><span>.</span><span>url</span><span>;</span></p></div>
+const result = await fal.subscribe("fal-ai/flux/dev", { input: { prompt, image_size: "square_hd", }, pollInterval: 5000, logs: true, onQueueUpdate(update) 
+{ console.log("queue update", update)
+; },
+})
+;const imageUrl = result.images[0].url;
 ```
 
 See more about Flux Dev used in this example on [fal.ai/models/fal-ai/flux/dev](https://fal.ai/models/fal-ai/flux/dev).

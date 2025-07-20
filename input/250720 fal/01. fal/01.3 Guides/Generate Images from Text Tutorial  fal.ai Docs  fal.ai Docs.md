@@ -5,7 +5,8 @@ To generate images using the fal API, you need to send a request to the appropri
 Here’s an example of how to generate an image using the fal API from text:
 
 ```
-<div><p><span>import</span><span> { fal } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/client</span><span>"</span><span>;</span></p></div><div><p><span>const </span><span>result</span><span> = await </span><span>fal</span><span>.</span><span>subscribe</span><span>(</span><span>"</span><span>fal-ai/flux/dev</span><span>"</span><span>, {</span></p></div><div><p><span><span>  </span></span><span>input: {</span></p></div><div><p><span><span>    </span></span><span>prompt: </span><span>"</span><span>a face of a cute puppy, in the style of pixar animation</span><span>"</span><span>,</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>}</span><span>);</span></p></div>
+import { fal } from "@fal-ai/client";const result = await fal.subscribe("fal-ai/flux/dev", { input: { prompt: "a face of a cute puppy, in the style of pixar animation", },})
+;
 ```
 
 ## How to select the model to use

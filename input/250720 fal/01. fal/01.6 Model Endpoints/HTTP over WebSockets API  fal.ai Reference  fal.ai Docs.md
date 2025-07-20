@@ -5,7 +5,7 @@ For applications that require real-time interaction or handle streaming, fal off
 To utilize the WebSocket functionality, use the `wss` protocol with the the `ws.fal.run` domain:
 
 ```
-<div><p><span>wss://ws.fal.run/{model_id}</span></p></div>
+wss://ws.fal.run/{model_id}
 ```
 
 ### Communication Protocol
@@ -28,25 +28,30 @@ Here’s an example of a typical interaction with the WebSocket API:
 **Client Sends (Payload Message):**
 
 ```
-<div><p><span>{</span><span>"prompt"</span><span>: </span><span>"</span><span>generate a 10-second audio clip of a cat purring</span><span>"</span><span>}</span></p></div>
+{"prompt": "generate a 10-second audio clip of a cat purring"}
 ```
 
 **Server Responds (Start Metadata):**
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"type"</span><span>: </span><span>"</span><span>start</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"request_id"</span><span>: </span><span>"</span><span>5d76da89-5d75-4887-a715-4302bf435614</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"status"</span><span>: </span><span>200</span><span>,</span></p></div><div><p><span>  </span><span>"headers"</span><span>: {</span></p></div><div><p><span>    </span><span>"Content-Type"</span><span>: </span><span>"</span><span>text/event-stream; charset=utf-8</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"Transfer-Encoding"</span><span>: </span><span>"</span><span>chunked</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>// ...</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>}</span></p></div>
+{ "type": "start",
+"request_id": "5d76da89-5d75-4887-a715-4302bf435614",
+"status": 200,
+"headers": { "Content-Type": "text/event-stream; charset=utf-8",
+"Transfer-Encoding": "chunked",
+// ... }}
 ```
 
 **Server Sends (Response Stream):**
 
 ```
-<div><p><span>&lt;binary audio data chunk 1&gt;</span></p></div><div><p><span>&lt;binary audio data chunk 2&gt;</span></p></div><div><p><span>...</span></p></div><div><p><span>&lt;binary audio data chunk N&gt;</span></p></div>
+&lt;binary audio data chunk 1&gt;&lt;binary audio data chunk 2&gt;...&lt;binary audio data chunk N&gt;
 ```
 
 **Server Sends (Completion Message):**
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"type"</span><span>: </span><span>"</span><span>end</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"request_id"</span><span>: </span><span>"</span><span>5d76da89-5d75-4887-a715-4302bf435614</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"status"</span><span>: </span><span>200</span><span>,</span></p></div><div><p><span>  </span><span>"time_to_first_byte_seconds"</span><span>: </span><span>0.577083</span></p></div><div><p><span>}</span></p></div>
+{ "type": "end", "request_id": "5d76da89-5d75-4887-a715-4302bf435614", "status": 200, "time_to_first_byte_seconds": 0.577083}
 ```
 
 This WebSocket integration provides a powerful mechanism for building dynamic and responsive AI applications on the fal platform. By leveraging the streaming capabilities, you can unlock new possibilities for creative and interactive user experiences.
@@ -56,13 +61,20 @@ This WebSocket integration provides a powerful mechanism for building dynamic an
 For instance, should you want to make fast prompts to any LLM, you can use `fal-ai/any-llm`.
 
 ```
-<div><p><span>import</span><span> fal.apps</span></p></div><div><p><span>with</span><span> fal.apps.</span><span>ws</span><span>(</span><span>"</span><span>fal-ai/any-llm</span><span>"</span><span>) </span><span>as</span><span> connection:</span></p></div><div><p><span>    </span><span>for</span><span> i </span><span>in</span><span> </span><span>range</span><span>(</span><span>3</span><span>):</span></p></div><div><p><span><span>        </span></span><span>connection.</span><span>send</span><span>(</span></p></div><div><p><span><span>            </span></span><span>{</span></p></div><div><p><span>                </span><span>"</span><span>model</span><span>"</span><span>: </span><span>"</span><span>google/gemini-flash-1.5</span><span>"</span><span>,</span></p></div><div><p><span>                </span><span>"</span><span>prompt</span><span>"</span><span>: </span><span>f</span><span>"What is the meaning of life? Respond in </span><span>{i}</span><span> words."</span><span>,</span></p></div><div><p><span><span>            </span></span><span>}</span></p></div><div><p><span>        </span><span>)</span></p></div><div><p><span>    </span><span># they should be in order</span></p></div><div><p><span>    </span><span>for</span><span> i </span><span>in</span><span> </span><span>range</span><span>(</span><span>3</span><span>):</span></p></div><div><p><span>        </span><span>import</span><span> json</span></p></div><div><p><span><span>        </span></span><span>response </span><span>=</span><span> json.</span><span>loads</span><span>(</span><span>connection.</span><span>recv</span><span>())</span></p></div><div><p><span>        </span><span>print</span><span>(</span><span>response</span><span>)</span></p></div>
+import fal
+.appswith fal.apps.ws("fal-ai/any-llm") 
+as connection: for i in range(3)
+: connection.send( { "model": "google/gemini-flash-1.5", "prompt": f"What is the meaning of life? Respond in {i} words.", } ) 
+# they should be in order for i in range(3)
+: import json response = json.loads(connection.recv()
+) 
+print(response)
 ```
 
 And running this program would output:
 
 ```
-<div><p><span>{</span><span>'output'</span><span>:</span><span> </span><span>'</span><span>(Silence)\n</span><span>'</span><span>,</span><span> </span><span>'</span><span>partial</span><span>'</span><span>:</span><span> </span><span>False,</span><span> </span><span>'</span><span>error</span><span>'</span><span>:</span><span> </span><span>None}</span></p></div><div><p><span>{</span><span>'output'</span><span>:</span><span> </span><span>'</span><span>Growth\n</span><span>'</span><span>,</span><span> </span><span>'</span><span>partial</span><span>'</span><span>:</span><span> </span><span>False,</span><span> </span><span>'</span><span>error</span><span>'</span><span>:</span><span> </span><span>None}</span></p></div><div><p><span>{</span><span>'output'</span><span>:</span><span> </span><span>'</span><span>Personal fulfillment.\n</span><span>'</span><span>,</span><span> </span><span>'</span><span>partial</span><span>'</span><span>:</span><span> </span><span>False,</span><span> </span><span>'</span><span>error</span><span>'</span><span>:</span><span> </span><span>None}</span></p></div>
+{'output': '(Silence)\n', 'partial': False, 'error': None}{'output': 'Growth\n', 'partial': False, 'error': None}{'output': 'Personal fulfillment.\n', 'partial': False, 'error': None}
 ```
 
 ### Example Program with Stream
@@ -70,11 +82,25 @@ And running this program would output:
 The `fal-ai/any-llm/stream` model is a streaming model that can generate text in real-time. Here’s an example of how you can use it:
 
 ```
-<div><p><span>with</span><span> fal.apps.</span><span>ws</span><span>(</span><span>"</span><span>fal-ai/any-llm/stream</span><span>"</span><span>) </span><span>as</span><span> connection:</span></p></div><div><p><span>    </span><span># </span><span>NOTE</span><span>: this app responds in 'text/event-stream' format</span></p></div><div><p><span>    </span><span># For example:</span></p></div><div><p><span>    </span><span>#</span></p></div><div><p><span>    </span><span>#    event: event</span></p></div><div><p><span>    </span><span>#    data: {"output": "Growth", "partial": true, "error": null}</span></p></div><div><p><span>    </span><span>for</span><span> i </span><span>in</span><span> </span><span>range</span><span>(</span><span>3</span><span>):</span></p></div><div><p><span><span>        </span></span><span>connection.</span><span>send</span><span>(</span></p></div><div><p><span><span>            </span></span><span>{</span></p></div><div><p><span>                </span><span>"</span><span>model</span><span>"</span><span>: </span><span>"</span><span>google/gemini-flash-1.5</span><span>"</span><span>,</span></p></div><div><p><span>                </span><span>"</span><span>prompt</span><span>"</span><span>: </span><span>f</span><span>"What is the meaning of life? Respond in </span><span>{i</span><span>+</span><span>1</span><span>}</span><span> words."</span><span>,</span></p></div><div><p><span><span>            </span></span><span>}</span></p></div><div><p><span>        </span><span>)</span></p></div><div><p><span>    </span><span>for</span><span> i </span><span>in</span><span> </span><span>range</span><span>(</span><span>3</span><span>):</span></p></div><div><p><span>        </span><span>for</span><span> bs </span><span>in</span><span> connection.</span><span>stream</span><span>():</span></p></div><div><p><span><span>            </span></span><span>lines </span><span>=</span><span> bs.</span><span>decode</span><span>().</span><span>replace</span><span>(</span><span>"</span><span>\r\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>\n</span><span>"</span><span>).</span><span>split</span><span>(</span><span>"</span><span>\n</span><span>"</span><span>)</span></p></div><div><p><span><span>            </span></span><span>event </span><span>=</span><span> {}</span></p></div><div><p><span>            </span><span>for</span><span> line </span><span>in</span><span> lines:</span></p></div><div><p><span>                </span><span>if</span><span> </span><span>not</span><span> line:</span></p></div><div><p><span>                    </span><span>continue</span></p></div><div><p><span><span>                </span></span><span>key, value </span><span>=</span><span> line.</span><span>split</span><span>(</span><span>"</span><span>:</span><span>"</span><span>,</span><span> </span><span>1</span><span>)</span></p></div><div><p><span><span>                </span></span><span>event[key] </span><span>=</span><span> value.</span><span>strip</span><span>()</span></p></div><div><p><span>            </span><span>print</span><span>(</span><span>event</span><span>[</span><span>"</span><span>data</span><span>"</span><span>])</span></p></div><div><p><span>        </span><span>print</span><span>(</span><span>"</span><span>----</span><span>"</span><span>)</span></p></div>
+with fal.apps.ws("fal-ai/any-llm/stream") 
+as connection: # NOTE: this app responds in 'text/event-stream' format # For example: # # event: event # data: {"output": "Growth",
+"partial": true,
+"error": null} for i in range(3)
+: connection.send( { "model": "google/gemini-flash-1.5", "prompt": f"What is the meaning of life? Respond in {i+1} words.", } ) 
+for i in range(3)
+: for bs in connection.stream()
+: lines = bs.decode()
+.replace("\r\n", "\n")
+.split("\n") 
+event = {} for line in lines: if not line: continue key,
+value = line.split(":", 1) 
+event[key] = value.strip() 
+print(event["data"]) 
+print("----")
 ```
 
 And running this program would output:
 
 ```
-<div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Perspective</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Perspective.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Perspective.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Perspective.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>false</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>----</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Find</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Find meaning.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Find meaning.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Find meaning.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>false</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>----</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Be</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Be, love, grow.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Be, love, grow.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>true</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>{</span><span>"output"</span><span>:</span><span> </span><span>"</span><span>Be, love, grow.\n</span><span>"</span><span>,</span><span> </span><span>"</span><span>partial</span><span>"</span><span>:</span><span> </span><span><span>false</span><span>,</span></span><span> </span><span>"</span><span>error</span><span>"</span><span>:</span><span> </span><span>null}</span></p></div><div><p><span>----</span></p></div>
+{"output": "Perspective", "partial": true, "error": null}{"output": "Perspective.\n", "partial": true, "error": null}{"output": "Perspective.\n", "partial": true, "error": null}{"output": "Perspective.\n", "partial": false, "error": null}----{"output": "Find", "partial": true, "error": null}{"output": "Find meaning.\n", "partial": true, "error": null}{"output": "Find meaning.\n", "partial": true, "error": null}{"output": "Find meaning.\n", "partial": false, "error": null}----{"output": "Be", "partial": true, "error": null}{"output": "Be, love, grow.\n", "partial": true, "error": null}{"output": "Be, love, grow.\n", "partial": true, "error": null}{"output": "Be, love, grow.\n", "partial": false, "error": null}----
 ```

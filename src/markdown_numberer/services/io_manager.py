@@ -353,7 +353,7 @@ class IOManager:
         if batch_id:
             dir_name = batch_id
         else:
-            dir_name = f"batch_{timestamp}"
+            dir_name = timestamp
         
         output_dir = self.config.output_path / dir_name
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -432,7 +432,7 @@ class IOManager:
         
         # Initialize batch metadata
         self.batch_metadata = BatchMetadata(
-            batch_id=batch_id or f"batch_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}",
+            batch_id=batch_id or datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
             start_time=datetime.now(),
             input_path=input_path,
             output_path=output_dir,

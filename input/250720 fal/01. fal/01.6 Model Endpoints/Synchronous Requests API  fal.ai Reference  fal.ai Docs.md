@@ -24,11 +24,11 @@ Parameters:
 Here is an example of using the curl command to submit a synchronous request:
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>POST</span><span> </span><span>https://fal.run/fal-ai/fast-sdxl</span><span> </span><span>\</span></p></div><div><p><span>  </span><span>-H</span><span> </span><span>"</span><span>Authorization: Key </span><span>$FAL_KEY</span><span>"</span><span> </span><span>\</span></p></div><div><p><span>  </span><span>-d</span><span> </span><span>'</span><span>{"prompt": "a cat"}</span><span>'</span></p></div>
+curl -X POST https://fal.run/fal-ai/fast-sdxl \ -H "Authorization: Key $FAL_KEY" \ -d '{"prompt": "a cat"}'
 ```
 
 The response will come directly from the model:
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"images"</span><span>: [</span></p></div><div><p><span><span>    </span></span><span>{</span></p></div><div><p><span>      </span><span>"url"</span><span>: </span><span>"</span><span>https://v3.fal.media/files/rabbit/YYbm6L3DaXYHDL1_A4OaL.jpeg</span><span>"</span><span>,</span></p></div><div><p><span>      </span><span>"width"</span><span>: </span><span>1024</span><span>,</span></p></div><div><p><span>      </span><span>"height"</span><span>: </span><span>1024</span><span>,</span></p></div><div><p><span>      </span><span>"content_type"</span><span>: </span><span>"</span><span>image/jpeg</span><span>"</span></p></div><div><p><span><span>    </span></span><span>}</span></p></div><div><p><span><span>  </span></span><span>],</span></p></div><div><p><span>  </span><span>"timings"</span><span>: {</span></p></div><div><p><span>    </span><span>"inference"</span><span>: </span><span>2.507048434985336</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>  </span><span>"seed"</span><span>: </span><span>15860307465884635512</span><span>,</span></p></div><div><p><span>  </span><span>"has_nsfw_concepts"</span><span>: [</span></p></div><div><p><span>    </span><span>false</span></p></div><div><p><span><span>  </span></span><span>],</span></p></div><div><p><span>  </span><span>"prompt"</span><span>: </span><span>"</span><span>a cat</span><span>"</span></p></div><div><p><span>}</span></p></div>
+{ "images": [ { "url": "https://v3.fal.media/files/rabbit/YYbm6L3DaXYHDL1_A4OaL.jpeg", "width": 1024, "height": 1024, "content_type": "image/jpeg" } ], "timings": { "inference": 2.507048434985336 }, "seed": 15860307465884635512, "has_nsfw_concepts": [ false ], "prompt": "a cat"}
 ```

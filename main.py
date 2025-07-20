@@ -3,8 +3,9 @@
 Simple markdown numbering script.
 
 Usage:
-    python main.py input_folder output_folder
-    python main.py /path/to/input /path/to/output
+    python main.py
+    
+Automatically processes files from 'input' directory and saves numbered files to timestamped subfolder in 'output'.
 """
 
 import asyncio
@@ -88,13 +89,8 @@ async def process_markdown_files(input_path: Path, output_path: Path, batch_id: 
 
 def main():
     """Main entry point."""
-    if len(sys.argv) != 3:
-        print("Usage: python main.py <input_folder> <output_folder>")
-        print("Example: python main.py /path/to/input /path/to/output")
-        sys.exit(1)
-    
-    input_path = Path(sys.argv[1])
-    output_path = Path(sys.argv[2])
+    input_path = Path("input")  # Hardcoded input directory
+    output_path = Path("output")  # Hardcoded output directory
     
     # Validate input path
     if not input_path.exists():
@@ -112,7 +108,7 @@ def main():
     success = asyncio.run(process_markdown_files(input_path, output_path))
     
     if success:
-        print(f"\n✅ Success! Check the output directory: {output_path}")
+        print(f"\n✅ Success! Check the timestamped subfolder in: {output_path}")
         sys.exit(0)
     else:
         print(f"\n❌ Processing failed. Check the logs for details.")

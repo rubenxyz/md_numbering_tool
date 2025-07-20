@@ -50,7 +50,7 @@ This error indicates an unexpected issue occurred on the server that prevented t
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Internal server error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>internal_server_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#internal_server_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: { </span><span>"prompt"</span><span>: </span><span>"</span><span>a cat</span><span>"</span><span> }</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body"], "msg": "Internal server error", "type": "internal_server_error", "url": "https://docs.fal.ai/errors/#internal_server_error", "input": { "prompt": "a cat" } }]
 ```
 
 ##### `generation_timeout`
@@ -62,7 +62,7 @@ This error occurs when the requested operation took longer than the allowed time
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Generation timeout</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>generation_timeout</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#generation_timeout</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: { </span><span>"prompt"</span><span>: </span><span>"</span><span>a very complex scene taking too long</span><span>"</span><span> }</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body"], "msg": "Generation timeout", "type": "generation_timeout", "url": "https://docs.fal.ai/errors/#generation_timeout", "input": { "prompt": "a very complex scene taking too long" } }]
 ```
 
 ##### `downstream_service_error`
@@ -74,7 +74,7 @@ This error signifies a problem when communicating with an external service requi
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Downstream service error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>downstream_service_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#downstream_service_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: { </span><span>"some_input"</span><span>: </span><span>"</span><span>value</span><span>"</span><span> }</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body"], "msg": "Downstream service error", "type": "downstream_service_error", "url": "https://docs.fal.ai/errors/#downstream_service_error", "input": { "some_input": "value" } }]
 ```
 
 ##### `downstream_service_unavailable`
@@ -86,7 +86,7 @@ This error indicates that a required third-party service (**including partner AP
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Downstream service unavailable</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>downstream_service_unavailable</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#downstream_service_unavailable</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: { </span><span>"prompt"</span><span>: </span><span>"</span><span>a cat</span><span>"</span><span> }</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body"], "msg": "Downstream service unavailable", "type": "downstream_service_unavailable", "url": "https://docs.fal.ai/errors/#downstream_service_unavailable", "input": { "prompt": "a cat" } }]
 ```
 
 ##### `content_policy_violation`
@@ -108,7 +108,7 @@ Violations may include, but are not limited to:
 -   Content that perpetuates harmful stereotypes.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>prompt</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>The content could not be processed because it contained material flagged by a content checker.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>content_policy_violation</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#content_policy_violation</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>a prompt containing forbidden content</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "prompt"], "msg": "The content could not be processed because it contained material flagged by a content checker.", "type": "content_policy_violation", "url": "https://docs.fal.ai/errors/#content_policy_violation", "input": "a prompt containing forbidden content" }]
 ```
 
 ##### `image_too_small`
@@ -122,7 +122,7 @@ This error indicates that the provided image dimensions are smaller than the req
     -   `min_width`: The minimum required width in pixels.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>image_url</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Image too small</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>image_too_small</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#image_too_small</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"min_height"</span><span>: </span><span>512</span><span>,</span></p></div><div><p><span>      </span><span>"min_width"</span><span>: </span><span>512</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/image_100x100.jpg</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "image_url"], "msg": "Image too small", "type": "image_too_small", "url": "https://docs.fal.ai/errors/#image_too_small", "ctx": { "min_height": 512, "min_width": 512 }, "input": "https://example.com/image_100x100.jpg" }]
 ```
 
 ##### `image_too_large`
@@ -136,7 +136,7 @@ This error indicates that the provided image dimensions exceed the maximum allow
     -   `max_width`: The maximum allowed width in pixels.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>input_image</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Image too large</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>image_too_large</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#image_too_large</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"max_height"</span><span>: </span><span>1024</span><span>,</span></p></div><div><p><span>      </span><span>"max_width"</span><span>: </span><span>1024</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/image_2000x2000.jpg</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "input_image"], "msg": "Image too large", "type": "image_too_large", "url": "https://docs.fal.ai/errors/#image_too_large", "ctx": { "max_height": 1024, "max_width": 1024 }, "input": "https://example.com/image_2000x2000.jpg" }]
 ```
 
 ##### `image_load_error`
@@ -148,7 +148,7 @@ This error occurs when the server failed to load or process the provided image, 
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>control_image</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Image load error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>image_load_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#image_load_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/corrupted_image.webp</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "control_image"], "msg": "Image load error", "type": "image_load_error", "url": "https://docs.fal.ai/errors/#image_load_error", "input": "https://example.com/corrupted_image.webp" }]
 ```
 
 ##### `file_download_error`
@@ -160,7 +160,7 @@ This error indicates that the server failed to download a file specified by a UR
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>video_url</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>File download error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>file_download_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#file_download_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://private-server.com/file.mp4</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "video_url"], "msg": "File download error", "type": "file_download_error", "url": "https://docs.fal.ai/errors/#file_download_error", "input": "https://private-server.com/file.mp4" }]
 ```
 
 ##### `face_detection_error`
@@ -172,7 +172,7 @@ This error is raised when the system could not detect a face in the provided ima
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>face_image</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Could not detect face in the image</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>face_detection_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#face_detection_error</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/landscape_no_face.jpg</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "face_image"], "msg": "Could not detect face in the image", "type": "face_detection_error", "url": "https://docs.fal.ai/errors/#face_detection_error", "input": "https://example.com/landscape_no_face.jpg" }]
 ```
 
 ##### `file_too_large`
@@ -185,7 +185,7 @@ This error indicates that the provided file exceeds the maximum allowed size.
     -   `max_size`: The maximum allowed file size in bytes.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>upload_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>File too large</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>file_too_large</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#file_too_large</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"max_size"</span><span>: </span><span>10485760</span><span> </span><span>// 10MB</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/large_video.mp4</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "upload_file"], "msg": "File too large", "type": "file_too_large", "url": "https://docs.fal.ai/errors/#file_too_large", "ctx": { "max_size": 10485760 // 10MB }, "input": "https://example.com/large_video.mp4" }]
 ```
 
 ##### `greater_than`
@@ -198,7 +198,7 @@ This error occurs when a numeric input value is not strictly greater than the sp
     -   `gt`: The value the input must be greater than.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>num_inference_steps</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Input should be greater than 0</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>greater_than</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#greater_than</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"gt"</span><span>: </span><span>0</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>0</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "num_inference_steps"], "msg": "Input should be greater than 0", "type": "greater_than", "url": "https://docs.fal.ai/errors/#greater_than", "ctx": { "gt": 0 }, "input": 0 }]
 ```
 
 ##### `greater_than_equal`
@@ -211,7 +211,7 @@ This error occurs when a numeric input value is less than the specified threshol
     -   `ge`: The value the input must be greater than or equal to.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>strength</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Input should be greater than or equal to 0</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>greater_than_equal</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#greater_than_equal</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"ge"</span><span>: </span><span>0</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>-0.5</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "strength"], "msg": "Input should be greater than or equal to 0", "type": "greater_than_equal", "url": "https://docs.fal.ai/errors/#greater_than_equal", "ctx": { "ge": 0 }, "input": -0.5 }]
 ```
 
 ##### `less_than`
@@ -224,7 +224,7 @@ This error occurs when a numeric input value is not strictly less than the speci
     -   `lt`: The value the input must be less than.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>negative_prompt_weight</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Input should be less than 1</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>less_than</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#less_than</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"lt"</span><span>: </span><span>1.0</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>1.0</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "negative_prompt_weight"], "msg": "Input should be less than 1", "type": "less_than", "url": "https://docs.fal.ai/errors/#less_than", "ctx": { "lt": 1.0 }, "input": 1.0 }]
 ```
 
 ##### `less_than_equal`
@@ -237,7 +237,7 @@ This error occurs when a numeric input value is greater than the specified thres
     -   `le`: The value the input must be less than or equal to.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>guidance_scale</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Input should be less than or equal to 20</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>less_than_equal</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#less_than_equal</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"le"</span><span>: </span><span>20</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>21</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "guidance_scale"], "msg": "Input should be less than or equal to 20", "type": "less_than_equal", "url": "https://docs.fal.ai/errors/#less_than_equal", "ctx": { "le": 20 }, "input": 21 }]
 ```
 
 ##### `multiple_of`
@@ -250,7 +250,7 @@ This error indicates that a numeric input value is not a multiple of the require
     -   `multiple_of`: The factor the input must be a multiple of.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>width</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Input should be a multiple of 8</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>multiple_of</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#multiple_of</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"multiple_of"</span><span>: </span><span>8</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>513</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "width"], "msg": "Input should be a multiple of 8", "type": "multiple_of", "url": "https://docs.fal.ai/errors/#multiple_of", "ctx": { "multiple_of": 8 }, "input": 513 }]
 ```
 
 ##### `sequence_too_short`
@@ -263,7 +263,7 @@ This error occurs when a sequence (like a list or string) has fewer items/charac
     -   `min_length`: The minimum required length of the sequence.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>prompts</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Sequence should have at least 1 items</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>sequence_too_short</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#sequence_too_short</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"min_length"</span><span>: </span><span>1</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: []</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "prompts"], "msg": "Sequence should have at least 1 items", "type": "sequence_too_short", "url": "https://docs.fal.ai/errors/#sequence_too_short", "ctx": { "min_length": 1 }, "input": [] }]
 ```
 
 ##### `sequence_too_long`
@@ -276,7 +276,7 @@ This error occurs when a sequence (like a list or string) has more items/charact
     -   `max_length`: The maximum allowed length of the sequence.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>controlnet_images</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Sequence should have at most 4 items</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>sequence_too_long</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#sequence_too_long</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"max_length"</span><span>: </span><span>4</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: [</span><span>"</span><span>img1.jpg</span><span>"</span><span>, </span><span>"</span><span>img2.jpg</span><span>"</span><span>, </span><span>"</span><span>img3.jpg</span><span>"</span><span>, </span><span>"</span><span>img4.jpg</span><span>"</span><span>, </span><span>"</span><span>img5.jpg</span><span>"</span><span>]</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "controlnet_images"], "msg": "Sequence should have at most 4 items", "type": "sequence_too_long", "url": "https://docs.fal.ai/errors/#sequence_too_long", "ctx": { "max_length": 4 }, "input": ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"] }]
 ```
 
 ##### `one_of`
@@ -289,7 +289,7 @@ This error indicates that the input value provided for a field is not among the 
     -   `expected`: A list containing the allowed values.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>scheduler</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Input should be 'EulerA' or 'DPM++'</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>one_of</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#one_of</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"expected"</span><span>: [</span><span>"</span><span>EulerA</span><span>"</span><span>, </span><span>"</span><span>DPM++</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>InvalidScheduler</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "scheduler"], "msg": "Input should be 'EulerA' or 'DPM++'", "type": "one_of", "url": "https://docs.fal.ai/errors/#one_of", "ctx": { "expected": ["EulerA", "DPM++"] }, "input": "InvalidScheduler" }]
 ```
 
 ##### `feature_not_supported`
@@ -301,7 +301,7 @@ This error is raised when the combination of input parameters requests a feature
 -   **Context (`ctx`):** None
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>advanced_feature</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Feature not supported</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>feature_not_supported</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#feature_not_supported</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>true</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "advanced_feature"], "msg": "Feature not supported", "type": "feature_not_supported", "url": "https://docs.fal.ai/errors/#feature_not_supported", "input": true }]
 ```
 
 ##### `invalid_archive`
@@ -314,7 +314,7 @@ This error occurs when the provided archive file (e.g., .zip, .tar) cannot be re
     -   `supported_extensions`: A list of supported archive file extensions.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>training_data</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Could not read or process the provided archive. Ensure it's a valid, non-corrupted archive.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>invalid_archive</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#invalid_archive</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"supported_extensions"</span><span>: [</span><span>"</span><span>.zip</span><span>"</span><span>, </span><span>"</span><span>.tar.gz</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/corrupted_archive.rar</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "training_data"], "msg": "Could not read or process the provided archive. Ensure it's a valid, non-corrupted archive.", "type": "invalid_archive", "url": "https://docs.fal.ai/errors/#invalid_archive", "ctx": { "supported_extensions": [".zip", ".tar.gz"] }, "input": "https://example.com/corrupted_archive.rar" }]
 ```
 
 ##### `archive_file_count_below_minimum`
@@ -329,7 +329,7 @@ This error indicates that the provided archive contains fewer files matching the
     -   `supported_extensions`: The file extensions that were counted. (e.g., extensions like `.jpg`, `.png` when used for image archives or `.mp4` when used for video archives).
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>image_archive</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Too few files in the archive. Expected at least 10 files with extensions .jpg, .png, found 8. Add more matching files to the archive.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>archive_file_count_below_minimum</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#archive_file_count_below_minimum</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"min_count"</span><span>: </span><span>10</span><span>,</span></p></div><div><p><span>      </span><span>"provided_count"</span><span>: </span><span>8</span><span>,</span></p></div><div><p><span>      </span><span>"supported_extensions"</span><span>: [</span><span>"</span><span>.jpg</span><span>"</span><span>, </span><span>"</span><span>.png</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/images_few.zip</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "image_archive"], "msg": "Too few files in the archive. Expected at least 10 files with extensions .jpg, .png, found 8. Add more matching files to the archive.", "type": "archive_file_count_below_minimum", "url": "https://docs.fal.ai/errors/#archive_file_count_below_minimum", "ctx": { "min_count": 10, "provided_count": 8, "supported_extensions": [".jpg", ".png"] }, "input": "https://example.com/images_few.zip" }]
 ```
 
 ##### `archive_file_count_exceeds_maximum`
@@ -344,7 +344,7 @@ This error indicates that the provided archive contains more files matching the 
     -   `supported_extensions`: The file extensions that were counted. (e.g., extensions like `.jpg`, `.png` when used for image archives or `.mp4` when used for video archives).
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>image_archive</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Too many files in the archive. Maximum is 100 files with extensions .jpg, .png, found 150. Remove 50 matching files from the archive.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>archive_file_count_exceeds_maximum</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#archive_file_count_exceeds_maximum</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"max_count"</span><span>: </span><span>100</span><span>,</span></p></div><div><p><span>      </span><span>"provided_count"</span><span>: </span><span>150</span><span>,</span></p></div><div><p><span>      </span><span>"supported_extensions"</span><span>: [</span><span>"</span><span>.jpg</span><span>"</span><span>, </span><span>"</span><span>.png</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/images_many.zip</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "image_archive"], "msg": "Too many files in the archive. Maximum is 100 files with extensions .jpg, .png, found 150. Remove 50 matching files from the archive.", "type": "archive_file_count_exceeds_maximum", "url": "https://docs.fal.ai/errors/#archive_file_count_exceeds_maximum", "ctx": { "max_count": 100, "provided_count": 150, "supported_extensions": [".jpg", ".png"] }, "input": "https://example.com/images_many.zip" }]
 ```
 
 ##### `audio_duration_too_long`
@@ -358,7 +358,7 @@ This error indicates that the provided audio file exceeds the maximum allowed du
     -   `provided_duration`: The duration of the provided audio file in seconds.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>audio_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Audio duration exceeds the maximum allowed. Maximum is 60 seconds, provided is 90 seconds.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>audio_duration_too_long</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#audio_duration_too_long</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"max_duration"</span><span>: </span><span>60</span><span>,</span></p></div><div><p><span>      </span><span>"provided_duration"</span><span>: </span><span>90</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/long_audio.mp3</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "audio_file"], "msg": "Audio duration exceeds the maximum allowed. Maximum is 60 seconds, provided is 90 seconds.", "type": "audio_duration_too_long", "url": "https://docs.fal.ai/errors/#audio_duration_too_long", "ctx": { "max_duration": 60, "provided_duration": 90 }, "input": "https://example.com/long_audio.mp3" }]
 ```
 
 ##### `audio_duration_too_short`
@@ -372,7 +372,7 @@ This error indicates that the provided audio file is shorter than the minimum re
     -   `provided_duration`: The duration of the provided audio file in seconds.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>audio_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Audio duration is too short. Minimum is 5 seconds, provided is 2 seconds.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>audio_duration_too_short</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#audio_duration_too_short</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"min_duration"</span><span>: </span><span>5</span><span>,</span></p></div><div><p><span>      </span><span>"provided_duration"</span><span>: </span><span>2</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/short_audio.mp3</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "audio_file"], "msg": "Audio duration is too short. Minimum is 5 seconds, provided is 2 seconds.", "type": "audio_duration_too_short", "url": "https://docs.fal.ai/errors/#audio_duration_too_short", "ctx": { "min_duration": 5, "provided_duration": 2 }, "input": "https://example.com/short_audio.mp3" }]
 ```
 
 ##### `unsupported_audio_format`
@@ -385,7 +385,7 @@ This error indicates that the audio file format is not supported by the endpoint
     -   `supported_formats`: A list of supported audio file extensions.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>audio_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Unsupported audio format. Supported formats are .mp3, .wav, .ogg.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>unsupported_audio_format</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#unsupported_audio_format</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"supported_formats"</span><span>: [</span><span>"</span><span>.mp3</span><span>"</span><span>, </span><span>"</span><span>.wav</span><span>"</span><span>, </span><span>"</span><span>.ogg</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/audio.midi</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "audio_file"], "msg": "Unsupported audio format. Supported formats are .mp3, .wav, .ogg.", "type": "unsupported_audio_format", "url": "https://docs.fal.ai/errors/#unsupported_audio_format", "ctx": { "supported_formats": [".mp3", ".wav", ".ogg"] }, "input": "https://example.com/audio.midi" }]
 ```
 
 ##### `unsupported_image_format`
@@ -398,7 +398,7 @@ This error indicates that the image file format is not supported by the endpoint
     -   `supported_formats`: A list of supported image file extensions.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>image</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Unsupported image format. Supported formats are .jpg, .jpeg, .png, .webp.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>unsupported_image_format</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#unsupported_image_format</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"supported_formats"</span><span>: [</span><span>"</span><span>.jpg</span><span>"</span><span>, </span><span>"</span><span>.jpeg</span><span>"</span><span>, </span><span>"</span><span>.png</span><span>"</span><span>, </span><span>"</span><span>.webp</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/image.tiff</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "image"], "msg": "Unsupported image format. Supported formats are .jpg, .jpeg, .png, .webp.", "type": "unsupported_image_format", "url": "https://docs.fal.ai/errors/#unsupported_image_format", "ctx": { "supported_formats": [".jpg", ".jpeg", ".png", ".webp"] }, "input": "https://example.com/image.tiff" }]
 ```
 
 ##### `unsupported_video_format`
@@ -411,7 +411,7 @@ This error indicates that the video file format is not supported by the endpoint
     -   `supported_formats`: A list of supported video file extensions.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>video_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Unsupported video format. Supported formats are .mp4, .mov, .webm.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>unsupported_video_format</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#unsupported_video_format</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"supported_formats"</span><span>: [</span><span>"</span><span>.mp4</span><span>"</span><span>, </span><span>"</span><span>.mov</span><span>"</span><span>, </span><span>"</span><span>.webm</span><span>"</span><span>]</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/video.avi</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "video_file"], "msg": "Unsupported video format. Supported formats are .mp4, .mov, .webm.", "type": "unsupported_video_format", "url": "https://docs.fal.ai/errors/#unsupported_video_format", "ctx": { "supported_formats": [".mp4", ".mov", ".webm"] }, "input": "https://example.com/video.avi" }]
 ```
 
 ##### `video_duration_too_long`
@@ -425,7 +425,7 @@ This error indicates that the provided video file exceeds the maximum allowed du
     -   `provided_duration`: The duration of the provided video file in seconds.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>video_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Video duration exceeds the maximum allowed. Maximum is 60 seconds, provided is 120 seconds.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>video_duration_too_long</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#video_duration_too_long</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"max_duration"</span><span>: </span><span>60</span><span>,</span></p></div><div><p><span>      </span><span>"provided_duration"</span><span>: </span><span>120</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/long_video.mp4</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "video_file"], "msg": "Video duration exceeds the maximum allowed. Maximum is 60 seconds, provided is 120 seconds.", "type": "video_duration_too_long", "url": "https://docs.fal.ai/errors/#video_duration_too_long", "ctx": { "max_duration": 60, "provided_duration": 120 }, "input": "https://example.com/long_video.mp4" }]
 ```
 
 ##### `video_duration_too_short`
@@ -439,5 +439,5 @@ This error indicates that the provided video file is shorter than the minimum re
     -   `provided_duration`: The duration of the provided video file in seconds.
 
 ```
-<div><p><span>[</span></p></div><div><p><span><span>  </span></span><span>{</span></p></div><div><p><span>    </span><span>"loc"</span><span>: [</span><span>"</span><span>body</span><span>"</span><span>, </span><span>"</span><span>video_file</span><span>"</span><span>],</span></p></div><div><p><span>    </span><span>"msg"</span><span>: </span><span>"</span><span>Video duration is too short. Minimum is 3 seconds, provided is 1 seconds.</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"type"</span><span>: </span><span>"</span><span>video_duration_too_short</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"url"</span><span>: </span><span>"</span><span>https://docs.fal.ai/errors/#video_duration_too_short</span><span>"</span><span>,</span></p></div><div><p><span>    </span><span>"ctx"</span><span>: {</span></p></div><div><p><span>      </span><span>"min_duration"</span><span>: </span><span>3</span><span>,</span></p></div><div><p><span>      </span><span>"provided_duration"</span><span>: </span><span>1</span></p></div><div><p><span><span>    </span></span><span>},</span></p></div><div><p><span>    </span><span>"input"</span><span>: </span><span>"</span><span>https://example.com/short_video.mp4</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>]</span></p></div>
+[ { "loc": ["body", "video_file"], "msg": "Video duration is too short. Minimum is 3 seconds, provided is 1 seconds.", "type": "video_duration_too_short", "url": "https://docs.fal.ai/errors/#video_duration_too_short", "ctx": { "min_duration": 3, "provided_duration": 1 }, "input": "https://example.com/short_video.mp4" }]
 ```

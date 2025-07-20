@@ -5,7 +5,8 @@ fal offers a simple and easy-to-use API that allows you to generate videos from 
 Here is an example of how to generate videos using the fal API:
 
 ```
-<div><p><span>import</span><span> { fal } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/client</span><span>"</span><span>;</span></p></div><div><p><span>const </span><span>result</span><span> = await </span><span>fal</span><span>.</span><span>subscribe</span><span>(</span><span>"</span><span>fal-ai/minimax-video/image-to-video</span><span>"</span><span>, {</span></p></div><div><p><span><span>  </span></span><span>input: {</span></p></div><div><p><span><span>    </span></span><span>prompt: </span><span>"</span><span>A stylish woman walks down a Tokyo street filled with warm glowing neon and animated city signage.</span><span>"</span><span>,</span></p></div><div><p><span><span>    </span></span><span>image_url: </span><span>"</span><span>https://fal.media/files/elephant/8kkhB12hEZI2kkbU8pZPA_test.jpeg</span><span>"</span></p></div><div><p><span><span>  </span></span><span>},</span></p></div><div><p><span>}</span><span>);</span></p></div>
+import { fal } from "@fal-ai/client";const result = await fal.subscribe("fal-ai/minimax-video/image-to-video", { input: { prompt: "A stylish woman walks down a Tokyo street filled with warm glowing neon and animated city signage.", image_url: "https://fal.media/files/elephant/8kkhB12hEZI2kkbU8pZPA_test.jpeg" },})
+;
 ```
 
 ## How to select the model to use

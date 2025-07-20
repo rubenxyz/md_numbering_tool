@@ -26,13 +26,13 @@ Parameters:
 Here is an example of using curl to submit a request which will add it to the queue:
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>POST</span><span> </span><span>https://queue.fal.run/fal-ai/fast-sdxl</span><span> </span><span>\</span></p></div><div><p><span>  </span><span>-H</span><span> </span><span>"</span><span>Authorization: Key </span><span>$FAL_KEY</span><span>"</span><span> </span><span>\</span></p></div><div><p><span>  </span><span>-d</span><span> </span><span>'</span><span>{"prompt": "a cat"}</span><span>'</span></p></div>
+curl -X POST https://queue.fal.run/fal-ai/fast-sdxl \ -H "Authorization: Key $FAL_KEY" \ -d '{"prompt": "a cat"}'
 ```
 
 Here’s an example of a response with the `request_id`:
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"request_id"</span><span>: </span><span>"</span><span>80e732af-660e-45cd-bd63-580e4f2a94cc</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"response_url"</span><span>: </span><span>"</span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"status_url"</span><span>: </span><span>"</span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc/status</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"cancel_url"</span><span>: </span><span>"</span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc/cancel</span><span>"</span></p></div><div><p><span>}</span></p></div>
+{ "request_id": "80e732af-660e-45cd-bd63-580e4f2a94cc", "response_url": "https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc", "status_url": "https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc/status", "cancel_url": "https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc/cancel"}
 ```
 
 The payload helps you to keep track of your request with the `request_id`, and provides you with the necessary information to get the status of your request, cancel it or get the response once it’s ready, so you don’t have to build these endpoints yourself.
@@ -42,13 +42,13 @@ The payload helps you to keep track of your request with the `request_id`, and p
 Once you have the request id you may use this request id to get the status of the request. This endpoint will give you information about your request’s status, it’s position in the queue or the response itself if the response is ready.
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>GET</span><span> </span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/status</span></p></div>
+curl -X GET https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/status
 ```
 
 Here’s an example of a response with the `IN_QUEUE` status:
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"status"</span><span>: </span><span>"</span><span>IN_QUEUE</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"queue_position"</span><span>: </span><span>0</span><span>,</span></p></div><div><p><span>  </span><span>"response_url"</span><span>: </span><span>"</span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc</span><span>"</span></p></div><div><p><span>}</span></p></div>
+{ "status": "IN_QUEUE", "queue_position": 0, "response_url": "https://queue.fal.run/fal-ai/fast-sdxl/requests/80e732af-660e-45cd-bd63-580e4f2a94cc"}
 ```
 
 #### Status types
@@ -73,7 +73,7 @@ Queue `status` can have one of the following types and their respective properti
 Logs are disabled by default. In order to enable logs for your request, you need to send the `logs=1` query parameter when getting the status of your request. For example:
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>GET</span><span> </span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/status?logs=</span><span>1</span></p></div>
+curl -X GET https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/status?logs=1
 ```
 
 When enabled, the `logs` attribute in the queue status contains an array of log entries, each represented by the `RequestLog` type. A `RequestLog` object has the following attributes:
@@ -95,13 +95,50 @@ This endpoint will keep the connection open until the status of the request chan
 It supports the same `logs` query parameter as the status.
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>GET</span><span> </span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/status/stream</span></p></div>
+curl -X GET https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/status/stream
 ```
 
 Here is an example of a stream of status updates:
 
 ```
-<div><p><span>$</span><span> </span><span>curl</span><span> </span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status/stream?logs=</span><span>1</span><span> </span><span>--header</span><span> </span><span>"</span><span>Authorization: Key </span><span>$FAL_KEY</span><span>"</span></p></div><div><p><span>data:</span><span> </span><span>{</span><span>"</span><span>status</span><span>"</span><span>:</span><span> </span><span>"</span><span>IN_PROGRESS</span><span>"</span><span>,</span><span> </span><span>"</span><span>request_id</span><span>"</span><span>:</span><span> </span><span>"</span><span>3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>response_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>status_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status</span><span>"</span><span>,</span><span> </span><span>"</span><span>cancel_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel</span><span>"</span><span>,</span><span> </span><span>"</span><span>logs</span><span>"</span><span>:</span><span> [], </span><span>"</span><span>metrics</span><span>"</span><span>: {}}</span></p></div><div><p><span>data:</span><span> </span><span>{</span><span>"</span><span>status</span><span>"</span><span>:</span><span> </span><span>"</span><span>IN_PROGRESS</span><span>"</span><span>,</span><span> </span><span>"</span><span>request_id</span><span>"</span><span>:</span><span> </span><span>"</span><span>3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>response_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>status_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status</span><span>"</span><span>,</span><span> </span><span>"</span><span>cancel_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel</span><span>"</span><span>,</span><span> </span><span>"</span><span>logs</span><span>"</span><span>:</span><span> [{</span><span>"timestamp"</span><span>:</span><span> </span><span>"</span><span>2024-12-20T15:37:17.120314</span><span>"</span><span>,</span><span> </span><span>"</span><span>message</span><span>"</span><span>:</span><span> </span><span>"</span><span>INFO:TRYON:Preprocessing images...</span><span>"</span><span>,</span><span> </span><span>"</span><span>labels</span><span>"</span><span>:</span><span> </span><span>{}},</span><span> </span><span>{</span><span>"</span><span>timestamp</span><span>"</span><span>:</span><span> </span><span>"</span><span>2024-12-20T15:37:17.286519</span><span>"</span><span>,</span><span> </span><span>"</span><span>message</span><span>"</span><span>:</span><span> </span><span>"</span><span>INFO:TRYON:Running try-on model...</span><span>"</span><span>,</span><span> </span><span>"</span><span>labels</span><span>"</span><span>:</span><span> </span><span>{}}],</span><span> </span><span>"</span><span>metrics</span><span>"</span><span>:</span><span> </span><span>{}}</span></p></div><div><p><span>data:</span><span> </span><span>{</span><span>"</span><span>status</span><span>"</span><span>:</span><span> </span><span>"</span><span>IN_PROGRESS</span><span>"</span><span>,</span><span> </span><span>"</span><span>request_id</span><span>"</span><span>:</span><span> </span><span>"</span><span>3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>response_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>status_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status</span><span>"</span><span>,</span><span> </span><span>"</span><span>cancel_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel</span><span>"</span><span>,</span><span> </span><span>"</span><span>logs</span><span>"</span><span>:</span><span> [], </span><span>"</span><span>metrics</span><span>"</span><span>: {}}</span></p></div><div><p><span>:</span><span> </span><span>ping</span></p></div><div><p><span>data:</span><span> </span><span>{</span><span>"</span><span>status</span><span>"</span><span>:</span><span> </span><span>"</span><span>IN_PROGRESS</span><span>"</span><span>,</span><span> </span><span>"</span><span>request_id</span><span>"</span><span>:</span><span> </span><span>"</span><span>3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>response_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>status_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status</span><span>"</span><span>,</span><span> </span><span>"</span><span>cancel_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel</span><span>"</span><span>,</span><span> </span><span>"</span><span>logs</span><span>"</span><span>:</span><span> [], </span><span>"</span><span>metrics</span><span>"</span><span>: {}}</span></p></div><div><p><span>data:</span><span> </span><span>{</span><span>"</span><span>status</span><span>"</span><span>:</span><span> </span><span>"</span><span>COMPLETED</span><span>"</span><span>,</span><span> </span><span>"</span><span>request_id</span><span>"</span><span>:</span><span> </span><span>"</span><span>3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>response_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf</span><span>"</span><span>,</span><span> </span><span>"</span><span>status_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status</span><span>"</span><span>,</span><span> </span><span>"</span><span>cancel_url</span><span>"</span><span>:</span><span> </span><span>"</span><span>https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel</span><span>"</span><span>,</span><span> </span><span>"</span><span>logs</span><span>"</span><span>:</span><span> [{</span><span>"timestamp"</span><span>:</span><span> </span><span>"</span><span>2024-12-20T15:37:32.161184</span><span>"</span><span>,</span><span> </span><span>"</span><span>message</span><span>"</span><span>:</span><span> </span><span>"</span><span>INFO:TRYON:Finished running try-on model.</span><span>"</span><span>,</span><span> </span><span>"</span><span>labels</span><span>"</span><span>:</span><span> </span><span>{}}],</span><span> </span><span>"</span><span>metrics</span><span>"</span><span>:</span><span> </span><span>{</span><span>"</span><span>inference_time</span><span>"</span><span>:</span><span> </span><span>17.795265674591064</span><span>}}</span></p></div>
+$ curl https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status/stream?logs=1 --header "Authorization: Key $FAL_KEY"data: {"status": "IN_PROGRESS",
+"request_id": "3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"response_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"status_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status",
+"cancel_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel",
+"logs": [],
+"metrics": {}}data: {"status": "IN_PROGRESS",
+"request_id": "3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"response_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"status_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status",
+"cancel_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel",
+"logs": [{"timestamp": "2024-12-20T15:37:17.120314",
+"message": "INFO:TRYON:Preprocessing images...",
+"labels": {}},
+{"timestamp": "2024-12-20T15:37:17.286519",
+"message": "INFO:TRYON:Running try-on model...",
+"labels": {}}],
+"metrics": {}}data: {"status": "IN_PROGRESS",
+"request_id": "3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"response_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"status_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status",
+"cancel_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel",
+"logs": [],
+"metrics": {}}: pingdata: {"status": "IN_PROGRESS",
+"request_id": "3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"response_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"status_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status",
+"cancel_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel",
+"logs": [],
+"metrics": {}}data: {"status": "COMPLETED",
+"request_id": "3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"response_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf",
+"status_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/status",
+"cancel_url": "https://queue.fal.run/fashn/tryon/requests/3e3e5b55-45fb-4e5c-b4d1-05702dffc8bf/cancel",
+"logs": [{"timestamp": "2024-12-20T15:37:32.161184",
+"message": "INFO:TRYON:Finished running try-on model.",
+"labels": {}}],
+"metrics": {"inference_time": 17.795265674591064}}
 ```
 
 ### Cancelling a request
@@ -109,13 +146,13 @@ Here is an example of a stream of status updates:
 If your request has not started processing (status is `IN_QUEUE`), you may attempt to cancel it.
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>PUT</span><span> </span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/cancel</span></p></div>
+curl -X PUT https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}/cancel
 ```
 
 If the request has not already started processing, you will get a `202 Accepted` response with the following body:
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"status"</span><span>: </span><span>"</span><span>CANCELLATION_REQUESTED</span><span>"</span></p></div><div><p><span>}</span></p></div>
+{ "status": "CANCELLATION_REQUESTED"}
 ```
 
 Note that a request may still be executed after getting this response if it was very late in the queue process.
@@ -123,7 +160,7 @@ Note that a request may still be executed after getting this response if it was 
 If the request is already processed, you will get a `400 Bad Request` response with this body:
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"status"</span><span>: </span><span>"</span><span>ALREADY_COMPLETED</span><span>"</span></p></div><div><p><span>}</span></p></div>
+{ "status": "ALREADY_COMPLETED"}
 ```
 
 ### Getting the response
@@ -131,13 +168,13 @@ If the request is already processed, you will get a `400 Bad Request` response w
 Once you get the `COMPLETED` status, the `response` will be available along with its `logs`.
 
 ```
-<div><p><span>curl</span><span> </span><span>-X</span><span> </span><span>GET</span><span> </span><span>https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}</span></p></div>
+curl -X GET https://queue.fal.run/fal-ai/fast-sdxl/requests/{request_id}
 ```
 
 Here’s an example of a response with the `COMPLETED` status:
 
 ```
-<div><p><span>{</span></p></div><div><p><span>  </span><span>"status"</span><span>: </span><span>"</span><span>COMPLETED</span><span>"</span><span>,</span></p></div><div><p><span>  </span><span>"logs"</span><span>: [</span></p></div><div><p><span><span>    </span></span><span>{</span></p></div><div><p><span>      </span><span>"message"</span><span>: </span><span>"</span><span>2020-05-04 14:00:00.000000</span><span>"</span><span>,</span></p></div><div><p><span>      </span><span>"level"</span><span>: </span><span>"</span><span>INFO</span><span>"</span><span>,</span></p></div><div><p><span>      </span><span>"source"</span><span>: </span><span>"</span><span>stdout</span><span>"</span><span>,</span></p></div><div><p><span>      </span><span>"timestamp"</span><span>: </span><span>"</span><span>2020-05-04T14:00:00.000000Z</span><span>"</span></p></div><div><p><span><span>    </span></span><span>}</span></p></div><div><p><span><span>  </span></span><span>],</span></p></div><div><p><span>  </span><span>"response"</span><span>: {</span></p></div><div><p><span>    </span><span>"message"</span><span>: </span><span>"</span><span>Hello World!</span><span>"</span></p></div><div><p><span><span>  </span></span><span>}</span></p></div><div><p><span>}</span></p></div>
+{ "status": "COMPLETED", "logs": [ { "message": "2020-05-04 14:00:00.000000", "level": "INFO", "source": "stdout", "timestamp": "2020-05-04T14:00:00.000000Z" } ], "response": { "message": "Hello World!" }}
 ```
 
 ### Using webhook callbacks

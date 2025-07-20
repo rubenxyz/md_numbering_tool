@@ -29,7 +29,7 @@ In case fal doesn’t provide a plug-and-play proxy implementation for your lang
 To use the proxy, you need to configure the client to use the proxy endpoint. You can do that by setting the `proxyUrl` option in the client configuration:
 
 ```
-<div><p><span>import</span><span> { fal } </span><span>from</span><span> </span><span>"</span><span>@fal-ai/client</span><span>"</span><span>;</span></p></div><div><p><span>fal</span><span>.</span><span>config</span><span>({</span></p></div><div><p><span><span>  </span></span><span>proxyUrl: </span><span>"</span><span>/api/fal/proxy</span><span>"</span><span>,</span></p></div><div><p><span>});</span></p></div>
+import { fal } from "@fal-ai/client";fal.config({ proxyUrl: "/api/fal/proxy",});
 ```
 
 ### Example implementation
