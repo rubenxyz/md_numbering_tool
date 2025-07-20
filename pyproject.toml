@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "markdown-numberer"
+version = "1.0.0"
+description = "Modern tool for hierarchical numbering of markdown files and headlines"
+authors = [{name = "Ruben", email = "ruben@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["markdown", "numbering", "documentation", "hierarchy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "aiofiles>=23.0.0",
+    "loguru>=0.7.0",
+]
+
+[project.optional-dependencies]
+performance = [
+    "uvloop>=0.17.0",
+    "orjson>=3.9.0",
+]
+
+# CLI removed - using simple script instead
+# [project.scripts]
+# markdown-numberer = "markdown_numberer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/markdown-numberer"
+Documentation = "https://markdown-numberer.readthedocs.io"
+Repository = "https://github.com/yourusername/markdown-numberer.git"
+"Bug Tracker" = "https://github.com/yourusername/markdown-numberer/issues"
+
+# Development tools removed - using simple script 
