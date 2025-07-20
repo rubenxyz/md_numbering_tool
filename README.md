@@ -91,85 +91,65 @@ output/
 git clone https://github.com/yourusername/markdown-numberer.git
 cd markdown-numberer
 
-# Install in development mode
-pip install -e .[dev]
+# Install dependencies
+pip install -e .
 
-# Install pre-commit hooks
-pre-commit install
+# Activate virtual environment (if using one)
+source venv/bin/activate  # or your preferred method
 ```
 
-### Running Tests
+### Testing the Script
 
 ```bash
-# Run all tests
-pytest
+# Test with sample files
+python main.py input output
 
-# Run with coverage
-pytest --cov=src/markdown_numberer
-
-# Run specific test categories
-pytest -m unit
-pytest -m integration
-pytest -m async
-```
-
-### Code Quality
-
-```bash
-# Format code
-black src/ tests/
-
-# Sort imports
-isort src/ tests/
-
-# Lint code
-ruff check src/ tests/
-
-# Type checking
-mypy src/
+# Test with your own files
+python main.py /path/to/your/input /path/to/your/output
 ```
 
 ## Configuration
 
-The tool supports configuration via YAML files:
+The script uses sensible defaults for most settings. If you need to customize the behavior, you can modify the `create_default_config()` function in `main.py`:
 
-```yaml
-numbering:
-  start_level: 1
-  max_depth: 6
-  separator: "."
-  preserve_existing: false
-
-files:
-  sorting_method: "alphabetical"  # alphabetical, creation_date, modification_date, size, custom
-  filename_separator: "-"
-  preserve_original_name: true
-  include_patterns: ["*.md", "*.markdown"]
-  exclude_patterns: ["**/.*", "**/*temp*"]
-
-logging:
-  level: "INFO"
-  format: "structured"
+```python
+def create_default_config(input_path: Path, output_path: Path) -> ProcessingConfig:
+    return ProcessingConfig(
+        input_path=input_path,
+        output_path=output_path,
+        start_level=1,                    # Starting level for numbering
+        max_depth=6,                      # Maximum depth for headlines
+        separator=".",                    # Separator for hierarchical numbers
+        preserve_existing=False,          # Whether to preserve existing numbering
+        sorting_method="alphabetical",    # File sorting method
+        filename_separator="-",           # Separator between number and filename
+        preserve_original_name=True,      # Keep original filename
+        include_patterns=["*.md", "*.markdown"],  # File patterns to process
+        exclude_patterns=["**/.*", "**/*temp*"],  # File patterns to exclude
+        max_concurrent_files=10,          # Concurrent processing limit
+        log_level="INFO",                 # Logging level
+        # ... other settings
+    )
 ```
 
 ## Architecture
 
 The project follows modern Python architecture patterns:
 
-- **Type Safety**: Full type hints with mypy validation
+- **Type Safety**: Full type hints with Pydantic validation
 - **Async Processing**: High-performance async file handling
-- **Dependency Injection**: Clean service architecture
+- **Service Architecture**: Clean separation of concerns
 - **Configuration Management**: Pydantic-based validation
 - **Error Handling**: Comprehensive exception hierarchy
-- **Testing**: Modern pytest patterns with property-based testing
+- **Logging**: Structured logging with multiple output formats
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass and code quality checks succeed
+4. Test the script with your changes
+5. Ensure the script works correctly
 6. Submit a pull request
 
 ## License
@@ -178,9 +158,9 @@ MIT License - see LICENSE file for details.
 
 ## Roadmap
 
-- [ ] Plugin architecture for custom numbering strategies
-- [ ] Web UI for interactive processing
-- [ ] API server for remote processing
-- [ ] Real-time processing with WebSocket updates
-- [ ] Database integration for processing history
-- [ ] Container support with Docker images 
+- [ ] Configuration file support (YAML/JSON)
+- [ ] Command-line argument customization
+- [ ] Batch processing with custom batch IDs
+- [ ] Performance optimization for large file sets
+- [ ] Additional output formats (PDF, HTML)
+- [ ] Plugin architecture for custom numbering strategies 
