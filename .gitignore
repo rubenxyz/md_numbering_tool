@@ -162,4 +162,5 @@ output/
 .venv/
 .ruff_cache/
 .pytest_cache/
-USER-FILES/
+USER-FILES/04.INPUT/
+USER-FILES/05.OUTPUT/
