@@ -157,3 +157,9 @@ output/
 # .pytest_cache/ (removed - using simple script)
 # .mypy_cache/ (removed - using simple script)
 # .ruff_cache/ (removed - using simple script)
+*.pyc
+.claude/
+.venv/
+.ruff_cache/
+.pytest_cache/
+USER-FILES/
